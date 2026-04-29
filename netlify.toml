@@ -1,0 +1,48 @@
+[build]
+  publish = "."
+
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Long-lived cache for versioned CSS/JS (wp-includes, wp-content plugins — filenames never change)
+[[headers]]
+  for = "/wp-includes/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/wp-content/plugins/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/wp-content/themes/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Uploaded assets (images, elementor CSS, videos)
+[[headers]]
+  for = "/wp-content/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# HTML pages — short cache so updates propagate quickly
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[redirects]]
+  from = "/wesafe/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/index.php/*"
+  to = "/"
+  status = 200
