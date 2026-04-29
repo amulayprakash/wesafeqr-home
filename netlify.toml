@@ -38,6 +38,11 @@
     Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[redirects]]
+  from = "/qr/:passcode"
+  to = "https://web.wesafeqr.com/qr/:passcode"
+  status = 301
+
+[[redirects]]
   from = "/wesafe/*"
   to = "/:splat"
   status = 301
