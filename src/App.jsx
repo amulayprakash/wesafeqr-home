@@ -8,6 +8,7 @@ import Pricing from './components/Pricing'
 import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
 import InteractiveBackground from './components/InteractiveBackground'
+import ScrollDownPopup from './components/ScrollDownPopup'
 
 export default function App() {
 
@@ -67,6 +68,7 @@ export default function App() {
         <Testimonials />
       </main>
       <Footer />
+      <ScrollDownPopup />
     </div>
   )
 }

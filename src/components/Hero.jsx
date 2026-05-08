@@ -44,6 +44,7 @@ export default function Hero() {
         autoPlay muted loop playsInline
         preload="auto"
         x-webkit-airplay="allow"
+        className="hero-video"
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',
@@ -308,6 +309,14 @@ export default function Hero() {
           }
           .hero-headline-col { flex: 1; }
           .hero-cta-col      { flex-shrink: 0; max-width: 360px; }
+        }
+
+        /* ── Mobile video: show full frame instead of cropping ── */
+        @media (max-width: 640px) {
+          .hero-video {
+            object-fit: contain !important;
+            object-position: center center !important;
+          }
         }
 
         /* ── Mobile-specific hero fixes ── */
