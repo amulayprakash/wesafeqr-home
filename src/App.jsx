@@ -11,9 +11,32 @@ import InteractiveBackground from './components/InteractiveBackground'
 
 export default function App() {
 
-  /* ── Smooth scroll with nav offset for anchor links ─────────────────────── */
+  /* ── Ultra-smooth scroll with easeInOutQuart easing ─────────────────────── */
   useEffect(() => {
     const NAV_HEIGHT = 76
+
+    function easeInOutQuart(t) {
+      return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2
+    }
+
+    function smoothScrollTo(targetY, duration = 920) {
+      const startY = window.scrollY
+      const diff = targetY - startY
+      if (Math.abs(diff) < 1) return
+      let startTime = null
+      let rafId = null
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp
+        const elapsed = timestamp - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        window.scrollTo(0, startY + diff * easeInOutQuart(progress))
+        if (progress < 1) rafId = requestAnimationFrame(step)
+      }
+
+      rafId = requestAnimationFrame(step)
+      return () => cancelAnimationFrame(rafId)
+    }
 
     const handleClick = (e) => {
       const anchor = e.target.closest('a[href^="#"]')
@@ -24,7 +47,7 @@ export default function App() {
       if (!target) return
       e.preventDefault()
       const top = target.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT
-      window.scrollTo({ top, behavior: 'smooth' })
+      smoothScrollTo(top)
     }
 
     document.addEventListener('click', handleClick)

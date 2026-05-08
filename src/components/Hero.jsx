@@ -13,12 +13,17 @@ const MARQUEE_ITEMS = [
 export default function Hero() {
   const videoRef = useRef(null)
   const [videoLoaded, setVideoLoaded] = useState(false)
+  const [loaderGone, setLoaderGone] = useState(false)
 
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    const onReady = () => setVideoLoaded(true)
+    const onReady = () => {
+      setVideoLoaded(true)
+      setTimeout(() => setLoaderGone(true), 950)
+    }
     v.addEventListener('canplay', onReady)
+    if (v.readyState >= 3) onReady()
     return () => v.removeEventListener('canplay', onReady)
   }, [])
 
@@ -52,15 +57,77 @@ export default function Hero() {
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Skeleton shimmer while loading */}
-      {!videoLoaded && (
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'hsl(230 28% 10%)' }}>
+      {/* ── Branded loading overlay ───────────────────────────────────────────── */}
+      {!loaderGone && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: 'hsl(230 32% 6%)',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          gap: '2.25rem',
+          opacity: videoLoaded ? 0 : 1,
+          transition: 'opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1)',
+          pointerEvents: videoLoaded ? 'none' : 'all',
+        }}>
+          {/* Shimmer sweep behind content */}
           <div style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: 'linear-gradient(90deg, transparent 0%, hsl(237 46% 62% / 0.07) 50%, transparent 100%)',
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            backgroundImage: 'linear-gradient(90deg, transparent 0%, hsl(237 46% 62% / 0.05) 50%, transparent 100%)',
             backgroundSize: '200% 100%',
-            animation: 'shimmer 1.8s ease-in-out infinite',
+            animation: 'shimmer 2.2s ease-in-out infinite',
           }} />
+
+          {/* Brand mark */}
+          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            {/* Shield icon */}
+            <div style={{
+              width: 64, height: 64,
+              background: 'hsl(237 46% 62% / 0.12)',
+              border: '1.5px solid hsl(237 46% 62% / 0.25)',
+              borderRadius: '1.125rem',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              animation: 'loader-pulse 2s ease-in-out infinite',
+            }}>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L4 5.5V11c0 4.5 3.4 8.7 8 9.9 4.6-1.2 8-5.4 8-9.9V5.5L12 2Z"
+                  stroke="url(#shield-grad)" strokeWidth="1.6" strokeLinejoin="round" fill="url(#shield-fill)" />
+                <path d="M9 12l2.2 2.2L15 9" stroke="hsl(160 76% 55%)" strokeWidth="1.6"
+                  strokeLinecap="round" strokeLinejoin="round" />
+                <defs>
+                  <linearGradient id="shield-grad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="hsl(237,46%,72%)" />
+                    <stop offset="1" stopColor="hsl(350,82%,65%)" />
+                  </linearGradient>
+                  <linearGradient id="shield-fill" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="hsl(237,46%,62%)" stopOpacity="0.15" />
+                    <stop offset="1" stopColor="hsl(350,82%,60%)" stopOpacity="0.08" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            {/* Wordmark */}
+            <span style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '1.75rem', fontWeight: 800,
+              letterSpacing: '-0.04em',
+              background: 'linear-gradient(135deg, hsl(237,46%,75%), hsl(350,82%,68%))',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>WeSafe</span>
+          </div>
+
+          {/* Animated loading dots */}
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            {[0, 1, 2].map(i => (
+              <span key={i} style={{
+                width: 7, height: 7, borderRadius: '50%',
+                background: 'hsl(237 46% 62%)',
+                display: 'block',
+                animation: `loader-dot 1.3s ease-in-out ${i * 0.18}s infinite`,
+              }} />
+            ))}
+          </div>
         </div>
       )}
 
@@ -204,6 +271,14 @@ export default function Hero() {
         @keyframes shimmer {
           0%   { background-position: -200% 0; }
           100% { background-position:  200% 0; }
+        }
+        @keyframes loader-dot {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+          40%            { transform: scale(1);   opacity: 1; }
+        }
+        @keyframes loader-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 hsl(237 46% 62% / 0.18); }
+          50%       { box-shadow: 0 0 0 12px hsl(237 46% 62% / 0); }
         }
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
