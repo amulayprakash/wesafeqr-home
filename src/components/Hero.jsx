@@ -60,7 +60,7 @@ export default function Hero() {
       {/* ── Branded loading overlay ───────────────────────────────────────────── */}
       {!loaderGone && (
         <div style={{
-          position: 'fixed', inset: 0, zIndex: 9999,
+          position: 'absolute', inset: 0, zIndex: 5,
           background: 'hsl(230 32% 6%)',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
