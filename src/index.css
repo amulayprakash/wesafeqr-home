@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── WeSafe Design Tokens — Light mode (mirrors wesafe-rewamp exactly) ─────── */
 @layer base {
   :root {
