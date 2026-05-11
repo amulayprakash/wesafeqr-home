@@ -7,7 +7,6 @@ import HowItWorks from './components/HowItWorks'
 import Pricing from './components/Pricing'
 import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
-import InteractiveBackground from './components/InteractiveBackground'
 import ScrollDownPopup from './components/ScrollDownPopup'
 
 export default function App() {
@@ -57,8 +56,7 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', zIndex: 1 }}>
-      <InteractiveBackground />
-      <Navbar />
+<Navbar />
       <main>
         <Hero />
         <Features />

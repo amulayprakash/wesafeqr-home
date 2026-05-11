@@ -11,20 +11,16 @@ const fadeUp = (delay = 0) => ({
 function QRScanSVG() {
   return (
     <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-      style={{ width: 100, height: 100 }} aria-hidden="true">
+      style={{ width: 110, height: 110 }} aria-hidden="true">
       <defs>
         <clipPath id="qr-card-clip"><rect width="120" height="120" rx="8" /></clipPath>
       </defs>
-      {/* QR finder — top-left */}
       <rect x="8" y="8" width="32" height="32" rx="4" stroke="hsl(237,46%,62%)" strokeWidth="2.5" fill="none" />
       <rect x="14" y="14" width="20" height="20" rx="2" fill="hsl(237,46%,62%)" opacity="0.8" />
-      {/* QR finder — top-right */}
       <rect x="80" y="8" width="32" height="32" rx="4" stroke="hsl(237,46%,62%)" strokeWidth="2.5" fill="none" />
       <rect x="86" y="14" width="20" height="20" rx="2" fill="hsl(237,46%,62%)" opacity="0.8" />
-      {/* QR finder — bottom-left */}
       <rect x="8" y="80" width="32" height="32" rx="4" stroke="hsl(237,46%,62%)" strokeWidth="2.5" fill="none" />
       <rect x="14" y="86" width="20" height="20" rx="2" fill="hsl(237,46%,62%)" opacity="0.8" />
-      {/* Data modules */}
       {[
         [48,8],[56,8],[64,8],[72,8],
         [48,16],[64,16],[72,16],
@@ -51,9 +47,7 @@ function QRScanSVG() {
         <animate attributeName="y" from="-3" to="120" dur="2.2s" repeatCount="indefinite" calcMode="easeInOut" />
         <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.08;0.92;1" dur="2.2s" repeatCount="indefinite" />
       </rect>
-      {[
-        ['M4 20 L4 4 L20 4', 'M100 4 L116 4 L116 20', 'M4 100 L4 116 L20 116', 'M116 100 L116 116 L100 116']
-      ][0].map((d, i) => (
+      {['M4 20 L4 4 L20 4', 'M100 4 L116 4 L116 20', 'M4 100 L4 116 L20 116', 'M116 100 L116 116 L100 116'].map((d, i) => (
         <path key={i} d={d} stroke="hsl(237,46%,62%)" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.4" />
       ))}
     </svg>
@@ -64,18 +58,12 @@ function QRScanSVG() {
 function ShieldSVG() {
   return (
     <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg"
-      style={{ width: 80, height: 88 }} aria-hidden="true">
+      style={{ width: 72, height: 80 }} aria-hidden="true">
       <ellipse cx="50" cy="55" rx="42" ry="46"
         stroke="hsl(237,46%,62%)" strokeWidth="1.5" fill="none">
         <animate attributeName="rx" values="40;44;40" dur="2.5s" repeatCount="indefinite" calcMode="easeInOut" />
         <animate attributeName="ry" values="44;48;44" dur="2.5s" repeatCount="indefinite" calcMode="easeInOut" />
         <animate attributeName="opacity" values="0.25;0.08;0.25" dur="2.5s" repeatCount="indefinite" calcMode="easeInOut" />
-      </ellipse>
-      <ellipse cx="50" cy="55" rx="34" ry="38"
-        stroke="hsl(237,46%,62%)" strokeWidth="1" fill="none">
-        <animate attributeName="rx" values="32;36;32" dur="2.5s" begin="0.4s" repeatCount="indefinite" calcMode="easeInOut" />
-        <animate attributeName="ry" values="36;40;36" dur="2.5s" begin="0.4s" repeatCount="indefinite" calcMode="easeInOut" />
-        <animate attributeName="opacity" values="0.15;0.04;0.15" dur="2.5s" begin="0.4s" repeatCount="indefinite" calcMode="easeInOut" />
       </ellipse>
       <path d="M50 8 L84 22 L84 52 C84 72 68 86 50 94 C32 86 16 72 16 52 L16 22 Z"
         fill="hsl(237,46%,62%)" opacity="0.1" stroke="hsl(237,46%,62%)" strokeWidth="2" strokeLinejoin="round" />
@@ -87,33 +75,11 @@ function ShieldSVG() {
   )
 }
 
-/* ── Lock-screen SVG ─────────────────────────────────────────────────────── */
-function LockScreenSVG() {
-  return (
-    <svg viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg"
-      style={{ width: 72, height: 90 }} aria-hidden="true">
-      <rect x="4" y="4" width="72" height="92" rx="14" fill="hsl(237,46%,62%)" opacity="0.06" stroke="hsl(237,46%,62%)" strokeWidth="1.5" />
-      <rect x="30" y="4" width="20" height="6" rx="3" fill="hsl(237,46%,62%)" opacity="0.3" />
-      <text x="40" y="32" textAnchor="middle" fontFamily="Outfit,sans-serif" fontSize="11" fontWeight="700" fill="hsl(237,40%,12%)" opacity="0.55">9:41</text>
-      <rect x="28" y="46" width="24" height="20" rx="4" fill="hsl(237,46%,62%)" opacity="0.85" />
-      <path d="M32 46 V40 A8 8 0 0 1 48 40 V46" stroke="hsl(237,46%,62%)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-      <circle cx="40" cy="55" r="3" fill="white" opacity="0.9" />
-      <text x="40" y="80" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="7" fill="hsl(237,40%,12%)" opacity="0.45">Scan to access</text>
-      <rect x="25" y="84" width="30" height="10" rx="3" fill="hsl(237,46%,62%)" opacity="0.15" />
-      <rect x="27" y="86" width="6" height="6" rx="1" fill="hsl(237,46%,62%)" opacity="0.5" />
-      <rect x="35" y="86" width="4" height="3" rx="0.5" fill="hsl(237,46%,62%)" opacity="0.4" />
-      <rect x="35" y="90" width="4" height="2" rx="0.5" fill="hsl(237,46%,62%)" opacity="0.4" />
-      <rect x="41" y="86" width="4" height="6" rx="1" fill="hsl(237,46%,62%)" opacity="0.5" />
-      <rect x="47" y="86" width="6" height="6" rx="1" fill="hsl(237,46%,62%)" opacity="0.5" />
-    </svg>
-  )
-}
-
 /* ── Family SVG ──────────────────────────────────────────────────────────── */
 function FamilySVG() {
   return (
     <svg viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg"
-      style={{ width: 100, height: 70 }} aria-hidden="true">
+      style={{ width: 90, height: 63 }} aria-hidden="true">
       <circle cx="20" cy="20" r="10" fill="hsl(237,46%,62%)" opacity="0.8" />
       <path d="M4 55 C4 40 36 40 36 55" stroke="hsl(237,46%,62%)" strokeWidth="2.5" fill="none" strokeLinecap="round" />
       <circle cx="50" cy="16" r="12" fill="hsl(350,82%,60%)" opacity="0.8" />
@@ -126,49 +92,11 @@ function FamilySVG() {
   )
 }
 
-const FEATURES = [
-  {
-    id: 'qr',
-    svg: <QRScanSVG />,
-    title: 'Emergency info on a QR code',
-    desc: 'All your critical medical data, emergency contacts, and health information encoded in a single scannable QR tag — always on you.',
-    accent: 'hsl(237 46% 62%)',
-    accentBg: 'hsl(237 46% 62% / 0.06)',
-    large: true,
-  },
-  {
-    id: 'lock',
-    svg: <LockScreenSVG />,
-    title: 'Lock-screen medical access',
-    desc: 'First responders scan your QR directly from the lock screen. No PIN. Critical info always accessible when seconds count.',
-    accent: 'hsl(197 84% 44%)',
-    accentBg: 'hsl(197 84% 44% / 0.06)',
-    large: false,
-  },
-  {
-    id: 'shield',
-    svg: <ShieldSVG />,
-    title: 'Your safety representative',
-    desc: 'WeSafe acts as your digital representative — storing emergency contacts and medical info so you never have to worry.',
-    accent: 'hsl(350 82% 60%)',
-    accentBg: 'hsl(350 82% 60% / 0.06)',
-    large: false,
-  },
-  {
-    id: 'family',
-    svg: <FamilySVG />,
-    title: 'Protect your whole family',
-    desc: 'Child profiles, multi-user management, and family plans. One subscription covers everyone you love.',
-    accent: 'hsl(160 76% 38%)',
-    accentBg: 'hsl(160 76% 38% / 0.06)',
-    large: true,
-  },
-]
-
 export default function Features() {
   return (
     <section id="features" style={{ padding: '6rem 0', background: 'white', position: 'relative' }}>
       <div className="container">
+
         {/* Header */}
         <div style={{ marginBottom: '3rem' }}>
           <motion.div className="section-label" {...fadeUp(0)}>Features</motion.div>
@@ -182,16 +110,116 @@ export default function Features() {
           </motion.p>
         </div>
 
-        {/* Bento grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }} className="bento-grid">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }} className="bento-row-1">
-            <BentoCard feature={FEATURES[0]} delay={0.08} />
-            <BentoCard feature={FEATURES[1]} delay={0.18} />
+        {/* Featured card — QR */}
+        <motion.div
+          {...fadeUp(0.08)}
+          whileHover={{ y: -4, boxShadow: '0 16px 48px hsl(237 46% 62% / 0.14)' }}
+          style={{
+            background: 'white',
+            border: '1px solid hsl(230 15% 88%)',
+            borderRadius: '1.5rem',
+            padding: 'clamp(2rem, 4vw, 2.75rem)',
+            position: 'relative',
+            overflow: 'hidden',
+            marginBottom: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '2.5rem',
+            flexWrap: 'wrap',
+            cursor: 'default',
+            transition: 'box-shadow 0.3s ease, transform 0.3s ease',
+          }}
+        >
+          {/* Accent top border */}
+          <div style={{
+            position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+            background: 'hsl(237 46% 62%)',
+            borderRadius: '1.5rem 1.5rem 0 0',
+          }} />
+
+          {/* Background glow */}
+          <div style={{
+            position: 'absolute', top: '-20%', right: '-5%',
+            width: '45%', height: '160%',
+            background: 'radial-gradient(ellipse at center, hsl(237 46% 62% / 0.07) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }} />
+
+          {/* Text — left */}
+          <div style={{ flex: 1, minWidth: 220, position: 'relative', zIndex: 1 }}>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.375rem',
+              background: 'hsl(237 46% 62% / 0.1)',
+              borderRadius: '2rem', padding: '0.25rem 0.875rem',
+              marginBottom: '1rem',
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'hsl(237 46% 62%)', display: 'inline-block' }} />
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', color: 'hsl(237 46% 50%)', textTransform: 'uppercase' }}>
+                Core feature
+              </span>
+            </div>
+            <h3 style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 700,
+              fontSize: 'clamp(1.25rem, 2.5vw, 1.625rem)', letterSpacing: '-0.02em',
+              lineHeight: 1.3, color: 'hsl(237 40% 12%)', marginBottom: '0.875rem',
+            }}>
+              Emergency info on a QR code
+            </h3>
+            <p style={{ fontSize: '0.9375rem', color: 'hsl(230 12% 48%)', lineHeight: 1.75, maxWidth: 440 }}>
+              All your critical medical data, emergency contacts, and health information encoded in a single scannable QR tag — always on you, readable without a login.
+            </p>
+
+            {/* Pill tags */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1.5rem' }}>
+              {['No app needed', 'Instant access', 'AES-256 encrypted'].map(tag => (
+                <span key={tag} style={{
+                  fontSize: '0.8125rem', fontWeight: 500,
+                  color: 'hsl(237 40% 40%)',
+                  background: 'hsl(237 46% 62% / 0.08)',
+                  border: '1px solid hsl(237 46% 62% / 0.2)',
+                  borderRadius: '2rem', padding: '0.25rem 0.75rem',
+                }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }} className="bento-row-2">
-            <BentoCard feature={FEATURES[2]} delay={0.08} />
-            <BentoCard feature={FEATURES[3]} delay={0.18} />
+
+          {/* Illustration — right */}
+          <div style={{
+            flexShrink: 0,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: 'clamp(120px, 18vw, 180px)', height: 'clamp(120px, 18vw, 180px)',
+            borderRadius: '1.25rem',
+            background: 'hsl(237 46% 62% / 0.06)',
+            position: 'relative', zIndex: 1,
+          }}>
+            <QRScanSVG />
           </div>
+        </motion.div>
+
+        {/* Secondary cards row */}
+        <div className="features-row-2">
+          <SecondaryCard
+            svg={<ShieldSVG />}
+            title="Your safety representative"
+            desc="WeSafe acts as your digital representative — storing emergency contacts and medical info so you never have to worry."
+            accent="hsl(350 82% 60%)"
+            accentBg="hsl(350 82% 60% / 0.06)"
+            accentText="hsl(350 82% 45%)"
+            label="Always available"
+            delay={0.14}
+          />
+          <SecondaryCard
+            svg={<FamilySVG />}
+            title="Protect your whole family"
+            desc="Child profiles, multi-user management, and family plans. One subscription covers everyone you love."
+            accent="hsl(160 76% 38%)"
+            accentBg="hsl(160 76% 38% / 0.06)"
+            accentText="hsl(160 76% 28%)"
+            label="Family plans"
+            delay={0.22}
+          />
         </div>
 
         {/* CTA Block */}
@@ -273,7 +301,7 @@ export default function Features() {
               }}>one-time</span>
             </div>
             <a
-              href="https://web.wesafeqr.com/subscription/pack"
+              href="https://web.wesafeqr.com"
               className="btn-primary"
               style={{ fontSize: '0.9375rem', padding: '0.875rem 2rem', whiteSpace: 'nowrap' }}
             >
@@ -284,30 +312,33 @@ export default function Features() {
       </div>
 
       <style>{`
-        @media (min-width: 640px) {
-          .bento-row-1 { grid-template-columns: 3fr 2fr !important; }
-          .bento-row-2 { grid-template-columns: 2fr 3fr !important; }
+        .features-row-2 {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
-        @media (min-width: 1024px) {
-          .bento-grid { grid-template-columns: 1fr !important; }
+        @media (min-width: 640px) {
+          .features-row-2 {
+            grid-template-columns: 1fr 1fr;
+          }
         }
       `}</style>
     </section>
   )
 }
 
-function BentoCard({ feature: f, delay }) {
+function SecondaryCard({ svg, title, desc, accent, accentBg, accentText, label, delay }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }}
-      whileHover={{ y: -4, boxShadow: `0 8px 32px ${f.accent.replace('hsl(','hsl(').replace(')', ' / 0.15)')}` }}
+      whileHover={{ y: -4, boxShadow: `0 12px 36px ${accent.replace(')', ' / 0.14)')}` }}
       style={{
         background: 'white',
         border: '1px solid hsl(230 15% 88%)',
-        borderRadius: '1.25rem',
+        borderRadius: '1.5rem',
         padding: '2rem',
         position: 'relative',
         overflow: 'hidden',
@@ -320,36 +351,52 @@ function BentoCard({ feature: f, delay }) {
       {/* Accent top border */}
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-        background: f.accent,
-        borderRadius: '1.25rem 1.25rem 0 0',
+        background: accent,
+        borderRadius: '1.5rem 1.5rem 0 0',
       }} />
 
       {/* Background tint */}
       <div style={{
-        position: 'absolute', top: 0, right: 0, width: '50%', height: '60%',
-        background: f.accentBg, borderRadius: '0 1.25rem 0 50%',
+        position: 'absolute', top: 0, right: 0, width: '55%', height: '55%',
+        background: accentBg, borderRadius: '0 1.5rem 0 60%',
         pointerEvents: 'none',
       }} />
 
-      {/* SVG illustration */}
+      {/* Illustration */}
       <div style={{
         display: 'flex', justifyContent: 'flex-end',
         position: 'relative', zIndex: 1,
       }}>
-        {f.svg}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: 90, height: 90,
+          borderRadius: '1rem',
+          background: accentBg,
+        }}>
+          {svg}
+        </div>
       </div>
 
-      {/* Text */}
+      {/* Label */}
       <div style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: '0.375rem',
+          marginBottom: '0.625rem',
+        }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: accent, display: 'inline-block' }} />
+          <span style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', color: accentText, textTransform: 'uppercase' }}>
+            {label}
+          </span>
+        </div>
         <h3 style={{
           fontFamily: "'Outfit', sans-serif", fontWeight: 700,
           fontSize: '1.125rem', letterSpacing: '-0.015em', lineHeight: 1.35,
           marginBottom: '0.625rem', color: 'hsl(237 40% 12%)',
         }}>
-          {f.title}
+          {title}
         </h3>
         <p style={{ fontSize: '0.9375rem', color: 'hsl(230 12% 52%)', lineHeight: 1.7 }}>
-          {f.desc}
+          {desc}
         </p>
       </div>
     </motion.div>
