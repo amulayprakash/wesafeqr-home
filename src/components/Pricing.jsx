@@ -193,7 +193,7 @@ export default function Pricing() {
 
                 {/* CTA */}
                 <div className="pricing-cta-row" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-                  <a href="https://web.wesafeqr.com/subscription/pack"
+                  <a href="https://web.wesafeqr.com"
                     className="btn-primary"
                     style={{ fontSize: '1.0625rem', padding: '0.9375rem 2rem' }}>
                     Get WeSafe now
