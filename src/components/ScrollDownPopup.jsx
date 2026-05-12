@@ -23,15 +23,14 @@ export default function ScrollDownPopup() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 16, x: '-50%' }}
+          animate={{ opacity: 1, y: 0, x: '-50%' }}
+          exit={{ opacity: 0, y: 16, x: '-50%' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
           style={{
             position: 'fixed',
             bottom: '2rem',
             left: '50%',
-            transform: 'translateX(-50%)',
             zIndex: 9999,
             display: 'none',
             pointerEvents: 'none',

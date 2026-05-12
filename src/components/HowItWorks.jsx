@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { motion } from 'framer-motion'
 
 const STEPS = [
@@ -8,6 +9,7 @@ const STEPS = [
     href: 'https://web.wesafeqr.com',
     color: 'hsl(237 46% 62%)',
     bg: 'hsl(237 46% 62% / 0.08)',
+    illustration: '/wesafe/steps-1.webp',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="8" r="4" />
@@ -23,6 +25,7 @@ const STEPS = [
     href: 'https://web.wesafeqr.com/subscription/pack',
     color: 'hsl(350 82% 60%)',
     bg: 'hsl(350 82% 60% / 0.08)',
+    illustration: '/wesafe/steps-2.webp',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
@@ -37,6 +40,7 @@ const STEPS = [
     desc: 'Anyone can scan your QR — even from your lock screen — to instantly access your critical info and contact your family in an emergency.',
     color: 'hsl(160 76% 38%)',
     bg: 'hsl(160 76% 38% / 0.08)',
+    illustration: '/wesafe/steps-3.webp',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -96,31 +100,43 @@ export default function HowItWorks() {
           </motion.p>
         </div>
 
-        {/* Desktop: horizontal steps with SVG connector */}
+        {/* Desktop: horizontal steps with arrow connectors */}
         <div className="steps-desktop">
-          <div style={{ position: 'relative', marginBottom: '2rem' }}>
-            <svg
-              viewBox="0 0 900 4"
-              style={{ width: '100%', height: 4, display: 'block' }}
-              preserveAspectRatio="none"
-            >
-              <line x1="150" y1="2" x2="750" y2="2"
-                stroke="hsl(230,15%,88%)"
-                strokeWidth="2"
-                strokeDasharray="600"
-                strokeDashoffset="600"
-              >
-                <animate attributeName="stroke-dashoffset" from="600" to="0" dur="1.5s" fill="freeze" calcMode="easeOut" />
-              </line>
-              {[150, 450, 750].map((cx, i) => (
-                <circle key={cx} cx={cx} cy="2" r="6" fill="white" stroke={STEPS[i].color.replace('hsl(', 'hsl(').replace(')', '')} strokeWidth="2" />
-              ))}
-            </svg>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr auto 1fr auto 1fr',
+            gap: '0',
+            alignItems: 'start',
+          }}>
             {STEPS.map((step, i) => (
-              <StepCard key={step.number} step={step} delay={i * 0.12} />
+              <Fragment key={step.number}>
+                <StepCard step={step} delay={i * 0.12} />
+                {i < STEPS.length - 1 && (
+                  <motion.div
+                    key={`arrow-${i}`}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.5, delay: i * 0.12 + 0.3 }}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      paddingTop: '4rem', width: '60px', flexShrink: 0,
+                    }}
+                  >
+                    <img
+                      src="/wesafe/arrow-right.webp"
+                      alt=""
+                      aria-hidden="true"
+                      style={{
+                        width: 40, height: 'auto',
+                        objectFit: 'contain',
+                        opacity: 0.5,
+                        filter: 'hue-rotate(200deg) saturate(0.8)',
+                      }}
+                    />
+                  </motion.div>
+                )}
+              </Fragment>
             ))}
           </div>
         </div>
@@ -172,6 +188,15 @@ export default function HowItWorks() {
                     }}>
                       {step.number}
                     </span>
+                    <div style={{ marginLeft: 'auto' }}>
+                      <img
+                        src={step.illustration}
+                        alt=""
+                        aria-hidden="true"
+                        style={{ height: 56, width: 'auto', objectFit: 'contain', opacity: 0.8 }}
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                   <h3 style={{
                     fontFamily: "'Outfit', sans-serif", fontWeight: 700,
@@ -231,21 +256,45 @@ function StepCard({ step, delay }) {
         display: 'flex', flexDirection: 'column', gap: '1.25rem',
         boxShadow: '0 2px 12px hsl(237 40% 12% / 0.05)',
         cursor: 'default',
+        overflow: 'hidden',
+        position: 'relative',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+      {/* Accent top border */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+        background: step.color, borderRadius: '1.25rem 1.25rem 0 0',
+      }} />
+
+      {/* Step illustration */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: step.bg, borderRadius: '1rem',
+        padding: '1.25rem', minHeight: 130,
+      }}>
+        <img
+          src={step.illustration}
+          alt={step.title}
+          style={{
+            maxHeight: 110, width: 'auto', objectFit: 'contain',
+            filter: `drop-shadow(0 8px 16px ${step.color.replace('hsl(', 'hsl(').replace(')', ' / 0.25)')})`,
+          }}
+          loading="lazy"
+        />
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          width: 52, height: 52, borderRadius: '0.875rem',
+          width: 40, height: 40, borderRadius: '0.75rem',
           background: step.bg, color: step.color,
-          boxShadow: `0 4px 12px ${step.bg}`,
           flexShrink: 0,
         }}>
           {step.icon}
         </div>
         <span style={{
           fontFamily: "'Outfit', sans-serif", fontWeight: 800,
-          fontSize: '3rem', lineHeight: 1,
+          fontSize: '2.5rem', lineHeight: 1,
           color: 'hsl(230 15% 92%)',
           letterSpacing: '-0.04em',
           userSelect: 'none',

@@ -44,7 +44,7 @@ export default function Navbar() {
 
             {/* Logo */}
             <a href="#" aria-label="WeSafe home" style={{ flexShrink: 0, zIndex: 60, position: 'relative' }}>
-              <img src="/logo.png" alt="WeSafe" style={{ height: '32px', width: 'auto' }} />
+              <img src="/logo.webp" alt="WeSafe" style={{ height: '32px', width: 'auto' }} />
             </a>
 
             {/* Desktop links */}

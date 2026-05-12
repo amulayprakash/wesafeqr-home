@@ -41,6 +41,19 @@ export default function Footer() {
         background: 'radial-gradient(ellipse 60% 100% at 50% 0%, hsl(237 46% 62% / 0.12) 0%, transparent 100%)',
         pointerEvents: 'none',
       }} />
+      {/* Decorative footer-1 image */}
+      <img
+        src="/wesafe/footer-1.webp"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute', right: 0, bottom: 0,
+          height: '70%', width: 'auto',
+          objectFit: 'contain', objectPosition: 'right bottom',
+          opacity: 0.055, pointerEvents: 'none',
+          userSelect: 'none',
+        }}
+      />
       {/* Brand accent bar */}
       <div style={{
         height: 3,
@@ -60,8 +73,8 @@ export default function Footer() {
           {/* Brand column */}
           <div className="footer-brand-col">
             <img
-              src="/logo.png" alt="WeSafe"
-              style={{ height: 32, width: 'auto', marginBottom: '1rem', filter: 'brightness(0) invert(1)' }}
+              src="/wesafe/footer-logo.webp" alt="WeSafe"
+              style={{ height: 36, width: 'auto', marginBottom: '1rem', filter: 'brightness(0) invert(1)' }}
             />
             <p style={{
               fontSize: '0.9375rem',

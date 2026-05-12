@@ -2,28 +2,31 @@ import { motion } from 'framer-motion'
 
 const OFFERINGS = [
   {
-    img: '/offering-1.png',
+    img: '/wesafe/asset-8.webp',
     title: 'True peace of mind',
     desc: 'WeSafe provides you with a reliable representative in times of emergency. You can rest assured that you and your loved ones will receive the care they need — always.',
     tag: 'Peace of mind',
     color: 'hsl(237 46% 62%)',
     bg: 'hsl(237 46% 62% / 0.06)',
+    ellipseLeft: true,
   },
   {
-    img: '/offering-2.png',
+    img: '/wesafe/asset-9.webp',
     title: 'Empowers you to feel safe',
     desc: 'People should not worry about emergency medical response when in a dire situation. Download the app and let WeSafe represent you reliably in times of need.',
     tag: 'Empowerment',
     color: 'hsl(350 82% 60%)',
     bg: 'hsl(350 82% 60% / 0.06)',
+    ellipseLeft: false,
   },
   {
-    img: '/offering-3.png',
+    img: '/wesafe/asset-10.webp',
     title: 'Military-grade data security',
     desc: 'We take data security and privacy seriously. State-of-the-art encryption ensures your medical information stays protected — accessible only when it matters.',
     tag: 'Data security',
     color: 'hsl(160 76% 38%)',
     bg: 'hsl(160 76% 38% / 0.06)',
+    ellipseLeft: true,
   },
 ]
 
@@ -31,8 +34,19 @@ export default function Offerings() {
   return (
     <section
       id="offerings"
-      style={{ padding: '6rem 0', background: 'white', position: 'relative' }}
+      style={{ padding: '6rem 0', background: 'white', position: 'relative', overflow: 'hidden' }}
     >
+      {/* Ellipse decorative blobs */}
+      <img src="/wesafe/ellipse.webp" alt="" aria-hidden="true" style={{
+        position: 'absolute', top: '5%', left: '-12%',
+        width: '40%', height: 'auto', opacity: 0.12,
+        filter: 'blur(32px)', pointerEvents: 'none', userSelect: 'none',
+      }} />
+      <img src="/wesafe/ellipse.webp" alt="" aria-hidden="true" style={{
+        position: 'absolute', top: '52%', right: '-12%',
+        width: '38%', height: 'auto', opacity: 0.1,
+        filter: 'blur(28px)', pointerEvents: 'none', userSelect: 'none',
+      }} />
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -120,9 +134,9 @@ function OfferingRow({ offering: o, index }) {
           src={o.img}
           alt={o.title}
           style={{
-            maxHeight: 200, maxWidth: '100%', objectFit: 'contain',
+            maxHeight: 260, maxWidth: '85%', objectFit: 'contain',
             position: 'relative', zIndex: 1,
-            filter: `drop-shadow(0 12px 28px ${o.color.replace('hsl(','hsl(').replace(')', ' / 0.25)')})`,
+            filter: `drop-shadow(0 16px 36px ${o.color.replace('hsl(','hsl(').replace(')', ' / 0.3)')})`,
           }}
           loading="lazy"
         />

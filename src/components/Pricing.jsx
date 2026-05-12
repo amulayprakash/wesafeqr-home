@@ -15,8 +15,34 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      style={{ padding: '6rem 0', background: 'hsl(230 22% 97%)', position: 'relative' }}
+      style={{ padding: '6rem 0', background: 'hsl(230 22% 97%)', position: 'relative', overflow: 'hidden' }}
     >
+      {/* Wave decoration at top */}
+      <img
+        src="/wesafe/wave-overlay-cta.webp"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute', top: 0, left: 0, right: 0,
+          width: '100%', height: 'auto',
+          objectFit: 'cover', objectPosition: 'top',
+          opacity: 0.18, pointerEvents: 'none',
+          userSelect: 'none',
+        }}
+      />
+      {/* Ellipse background blob */}
+      <img
+        src="/wesafe/ellipse.webp"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute', top: '10%', left: '50%',
+          transform: 'translateX(-50%)',
+          width: '70%', height: 'auto',
+          opacity: 0.1, filter: 'blur(40px)',
+          pointerEvents: 'none', userSelect: 'none',
+        }}
+      />
       <div className="container">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -75,11 +101,11 @@ export default function Pricing() {
 
               <div style={{ padding: '2.25rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                 {/* Header row */}
-                <div style={{
+                <div className="pricing-header-row" style={{
                   display: 'flex', alignItems: 'flex-start',
                   justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem',
                 }}>
-                  <div>
+                  <div className="pricing-title-block">
                     <span style={{
                       display: 'block',
                       fontSize: '0.75rem', fontFamily: "'Outfit', sans-serif",
@@ -102,7 +128,7 @@ export default function Pricing() {
                   </div>
 
                   {/* Price */}
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <div className="pricing-price-block" style={{ textAlign: 'right', flexShrink: 0 }}>
                     <div style={{
                       fontSize: '0.875rem',
                       color: 'hsl(230 12% 70%)',
@@ -166,7 +192,7 @@ export default function Pricing() {
                 </ul>
 
                 {/* CTA */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                <div className="pricing-cta-row" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
                   <a href="https://web.wesafeqr.com/subscription/pack"
                     className="btn-primary"
                     style={{ fontSize: '1.0625rem', padding: '0.9375rem 2rem' }}>

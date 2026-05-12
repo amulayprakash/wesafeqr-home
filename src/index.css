@@ -285,6 +285,33 @@ body::before {
   .scroll-popup { display: flex !important; }
 }
 
+/* ── Pricing card mobile alignment ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .pricing-header-row {
+    flex-direction: column;
+    align-items: center !important;
+    text-align: center;
+  }
+  .pricing-title-block {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-title-block h3 {
+    text-align: center;
+    max-width: 100% !important;
+  }
+  .pricing-price-block {
+    text-align: center !important;
+    align-self: center;
+  }
+  .pricing-cta-row {
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+  }
+}
+
 /* ── Scrollbar ───────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: hsl(var(--background)); }

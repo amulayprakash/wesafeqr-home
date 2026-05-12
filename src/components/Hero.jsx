@@ -38,6 +38,22 @@ export default function Hero() {
       }}
     >
 
+      {/* ── Static banner background (visible before/instead of video) ───────── */}
+      <img
+        src="/wesafe/banne.webp"
+        alt=""
+        aria-hidden="true"
+        className="hero-banner-bg"
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center 30%',
+          display: 'block',
+          zIndex: 0,
+        }}
+      />
+
       {/* ── Full-screen video ─────────────────────────────────────────────────── */}
       <video
         ref={videoRef}
@@ -53,15 +69,32 @@ export default function Hero() {
           opacity: videoLoaded ? 1 : 0,
           transition: 'opacity 1.1s ease',
           display: 'block',
+          zIndex: 1,
         }}
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
+      {/* ── Brand overlay texture ─────────────────────────────────────────────── */}
+      <img
+        src="/wesafe/overlay-hero.png"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          opacity: 0.35,
+          mixBlendMode: 'multiply',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
+      />
+
       {/* ── Branded loading overlay ───────────────────────────────────────────── */}
       {!loaderGone && (
         <div style={{
-          position: 'absolute', inset: 0, zIndex: 5,
+          position: 'absolute', inset: 0, zIndex: 10,
           background: 'hsl(230 32% 6%)',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
@@ -133,21 +166,24 @@ export default function Hero() {
       )}
 
       {/* ── Gradient overlay — transparent top → dark bottom ─────────────────── */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        background: [
-          'linear-gradient(to bottom,',
-          '  hsl(230 32% 6% / 0.18) 0%,',
-          '  hsl(230 32% 6% / 0.06) 18%,',
-          '  hsl(230 32% 6% / 0.35) 50%,',
-          '  hsl(230 32% 6% / 0.82) 75%,',
-          '  hsl(230 32% 6% / 0.97) 100%)',
-        ].join(' '),
-      }} />
+      <div
+        className="hero-gradient-overlay"
+        style={{
+          position: 'absolute', inset: 0, zIndex: 3, pointerEvents: 'none',
+          background: [
+            'linear-gradient(to bottom,',
+            '  hsl(230 32% 6% / 0.18) 0%,',
+            '  hsl(230 32% 6% / 0.06) 18%,',
+            '  hsl(230 32% 6% / 0.35) 50%,',
+            '  hsl(230 32% 6% / 0.82) 75%,',
+            '  hsl(230 32% 6% / 0.97) 100%)',
+          ].join(' '),
+        }}
+      />
 
       {/* ── Content — bottom anchored ─────────────────────────────────────────── */}
-      <div style={{
-        position: 'relative', zIndex: 2,
+      <div className="hero-content-mobile-inner" style={{
+        position: 'relative', zIndex: 4,
         minHeight: '100dvh',
         display: 'flex',
         flexDirection: 'column',
@@ -186,7 +222,7 @@ export default function Hero() {
             Your personal QR safety representative
           </motion.div>
 
-          {/* ── Two-column bottom row: headline left · subtext+CTA right ── */}
+          {/* ── Three-column bottom row: headline · subtext+CTA · phone mockup ── */}
           <div className="hero-bottom-row">
 
             {/* Headline */}
@@ -236,6 +272,43 @@ export default function Hero() {
                   See how it works
                 </a>
               </div>
+            </motion.div>
+
+            {/* iPhone mockup — desktop only */}
+            <motion.div
+              className="hero-phone-col"
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                position: 'relative',
+              }}
+            >
+              {/* Glow behind phone */}
+              <div style={{
+                position: 'absolute',
+                bottom: '-10%', left: '50%',
+                transform: 'translateX(-50%)',
+                width: '120%', height: '60%',
+                background: 'radial-gradient(ellipse at center, hsl(237 46% 62% / 0.35) 0%, transparent 70%)',
+                pointerEvents: 'none',
+                filter: 'blur(20px)',
+              }} />
+              <img
+                src="/wesafe/iphone-mockup.webp"
+                alt="WeSafe app on iPhone"
+                style={{
+                  height: 'clamp(200px, 28vw, 340px)',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  position: 'relative',
+                  filter: 'drop-shadow(0 32px 48px hsl(237 46% 30% / 0.5))',
+                }}
+              />
             </motion.div>
 
           </div>
@@ -300,37 +373,92 @@ export default function Hero() {
           flex-direction: column;
           gap: 1.25rem;
         }
+        .hero-phone-col { display: none; }
 
         @media (min-width: 768px) {
           .hero-bottom-row {
             flex-direction: row;
             align-items: flex-end;
-            gap: clamp(2.5rem, 5vw, 5rem);
+            gap: clamp(2rem, 4vw, 4rem);
           }
           .hero-headline-col { flex: 1; }
-          .hero-cta-col      { flex-shrink: 0; max-width: 360px; }
+          .hero-cta-col      { flex-shrink: 0; max-width: 340px; }
+        }
+        @media (min-width: 1024px) {
+          .hero-phone-col { display: flex; }
         }
 
-        /* ── Mobile video: show full frame instead of cropping ── */
-        @media (max-width: 640px) {
-          .hero-video {
-            object-fit: contain !important;
-            object-position: center center !important;
+        /* ── Mobile layout: video on top, content stacked below ── */
+        @media (max-width: 767px) {
+          #hero {
+            min-height: auto !important;
           }
-        }
 
-        /* ── Mobile-specific hero fixes ── */
-        @media (max-width: 640px) {
+          .hero-banner-bg,
+          .hero-video {
+            top: 0 !important;
+            bottom: auto !important;
+            height: 52dvh !important;
+            width: 100% !important;
+            object-fit: cover !important;
+            object-position: center 25% !important;
+          }
+
+          /* Gradient: transparent top, rich dark fade from mid-video down */
+          .hero-gradient-overlay {
+            background: linear-gradient(
+              to bottom,
+              hsl(230 32% 6% / 0.08) 0%,
+              hsl(230 32% 6% / 0.10) 28%,
+              hsl(230 32% 6% / 0.72) 44%,
+              hsl(230 32% 6% / 0.96) 52%,
+              hsl(230 32% 6%) 58%,
+              hsl(230 32% 6%) 100%
+            ) !important;
+          }
+
+          /* Push content to start just below the video fade */
+          .hero-content-mobile-inner {
+            min-height: auto !important;
+            justify-content: flex-start !important;
+            padding-top: 50dvh;
+          }
+
+          .hero-container-pad {
+            padding-top: 1.5rem;
+            padding-bottom: 1.75rem;
+          }
+
+          /* Tighter headline on small screens */
+          .hero-headline-col h1 {
+            font-size: clamp(2.2rem, 9.5vw, 2.9rem) !important;
+            line-height: 1.05 !important;
+            letter-spacing: -0.04em !important;
+          }
+
           .hero-cta-col p {
             font-size: 0.9375rem !important;
             max-width: 100% !important;
-            margin-bottom: 1.25rem !important;
+            margin-bottom: 1.375rem !important;
+            color: hsl(230 12% 68%) !important;
+            line-height: 1.65 !important;
           }
+
+          /* Full-width pill CTA on mobile */
           .btn-hero-glass {
             width: 100%;
             justify-content: center;
-            font-size: 0.9375rem !important;
-            padding: 0.875rem 1.25rem !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            padding: 0.9rem 1.25rem !important;
+            border-radius: 0.75rem !important;
+            background: hsl(237 46% 62% / 0.18) !important;
+            border-color: hsl(237 46% 62% / 0.35) !important;
+            letter-spacing: -0.01em !important;
+          }
+          .btn-hero-glass:hover {
+            background: hsl(237 46% 62% / 0.28) !important;
+            border-color: hsl(237 46% 62% / 0.5) !important;
           }
         }
 

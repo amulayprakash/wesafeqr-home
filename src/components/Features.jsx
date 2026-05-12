@@ -145,6 +145,20 @@ export default function Features() {
             pointerEvents: 'none',
           }} />
 
+          {/* Asset-13 decorative background image */}
+          <img
+            src="/wesafe/asset-13.webp"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute', bottom: 0, right: 0,
+              height: '100%', width: 'auto',
+              objectFit: 'contain', objectPosition: 'right bottom',
+              opacity: 0.06, pointerEvents: 'none',
+              userSelect: 'none',
+            }}
+          />
+
           {/* Text — left */}
           <div style={{ flex: 1, minWidth: 220, position: 'relative', zIndex: 1 }}>
             <div style={{
@@ -185,23 +199,38 @@ export default function Features() {
             </div>
           </div>
 
-          {/* Illustration — right */}
+          {/* Product preview image — right */}
           <div style={{
             flexShrink: 0,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: 'clamp(120px, 18vw, 180px)', height: 'clamp(120px, 18vw, 180px)',
-            borderRadius: '1.25rem',
-            background: 'hsl(237 46% 62% / 0.06)',
+            width: 'clamp(140px, 20vw, 220px)',
             position: 'relative', zIndex: 1,
           }}>
-            <QRScanSVG />
+            <img
+              src="/wesafe/product-preview.webp"
+              alt="WeSafe app QR profile"
+              style={{
+                width: '100%', height: 'auto',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 16px 32px hsl(237 46% 62% / 0.3))',
+              }}
+              loading="lazy"
+            />
           </div>
         </motion.div>
 
         {/* Secondary cards row */}
         <div className="features-row-2">
           <SecondaryCard
-            svg={<ShieldSVG />}
+            svg={
+              <img
+                src="/wesafe/research.webp"
+                alt=""
+                aria-hidden="true"
+                style={{ width: 54, height: 54, objectFit: 'contain', filter: 'drop-shadow(0 4px 10px hsl(350 82% 60% / 0.3))' }}
+                loading="lazy"
+              />
+            }
             title="Your safety representative"
             desc="WeSafe acts as your digital representative — storing emergency contacts and medical info so you never have to worry."
             accent="hsl(350 82% 60%)"
@@ -221,6 +250,59 @@ export default function Features() {
             delay={0.22}
           />
         </div>
+
+        {/* Product demo video card */}
+        <motion.div
+          {...fadeUp(0.1)}
+          style={{
+            marginTop: '1rem',
+            borderRadius: '1.5rem',
+            overflow: 'hidden',
+            position: 'relative',
+            border: '1px solid hsl(230 15% 88%)',
+            background: 'hsl(237 40% 6%)',
+            aspectRatio: '16 / 7',
+            cursor: 'default',
+          }}
+        >
+          <video
+            autoPlay muted loop playsInline
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'cover',
+            }}
+          >
+            <source src="/wesafe/product-demo.mp4" type="video/mp4" />
+          </video>
+          {/* Overlay gradient */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to right, hsl(237 40% 6% / 0.75) 0%, transparent 60%)',
+            pointerEvents: 'none',
+          }} />
+          {/* Label */}
+          <div style={{
+            position: 'absolute', bottom: '1.75rem', left: '2rem',
+            zIndex: 2,
+          }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              background: 'hsl(0 0% 100% / 0.1)',
+              border: '1px solid hsl(0 0% 100% / 0.2)',
+              backdropFilter: 'blur(8px)',
+              borderRadius: '9999px',
+              padding: '0.3rem 0.875rem',
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '0.8rem', fontWeight: 600,
+              color: 'hsl(0 0% 88%)',
+              letterSpacing: '0.03em',
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'hsl(350 82% 60%)', boxShadow: '0 0 8px hsl(350 82% 60%)' }} />
+              See WeSafe in action
+            </span>
+          </div>
+        </motion.div>
 
         {/* CTA Block */}
         <motion.div {...fadeUp(0.1)} style={{

@@ -5,7 +5,7 @@ const TESTIMONIALS = [
     quote: 'WeSafe is a safety assurance for my entire family. The peace of mind it gives me knowing my parents have their emergency info always on them is priceless.',
     author: 'Priya S.',
     role: 'Parent of two · Bengaluru',
-    avatar: '/testimonial-1.png',
+    avatar: '/wesafe/parent-avatar-1.webp',
     stars: 5,
     accent: 'hsl(237 46% 62%)',
   },
@@ -13,7 +13,7 @@ const TESTIMONIALS = [
     quote: 'My parents stay alone and I live in a different city. WeSafe is the perfect caretaker companion — I know first responders will have everything they need.',
     author: 'Arjun M.',
     role: 'Working professional · Mumbai',
-    avatar: '/testimonial-2.png',
+    avatar: '/wesafe/parent-avatar-2.webp',
     stars: 5,
     accent: 'hsl(350 82% 60%)',
   },
@@ -94,6 +94,57 @@ export default function Testimonials() {
             Trusted by families across India
           </motion.h2>
         </div>
+
+        {/* Family hero image with gradient fade */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            position: 'relative',
+            borderRadius: '1.5rem',
+            overflow: 'hidden',
+            marginBottom: '3rem',
+            height: 'clamp(180px, 28vw, 320px)',
+          }}
+        >
+          <img
+            src="/wesafe/parent-family.webp"
+            alt="WeSafe families across India"
+            style={{
+              width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: 'center 30%',
+              display: 'block',
+            }}
+            loading="lazy"
+          />
+          {/* Gradient overlays */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to bottom, transparent 30%, white 100%)',
+            pointerEvents: 'none',
+          }} />
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to right, hsl(237 40% 10% / 0.4) 0%, transparent 60%)',
+            pointerEvents: 'none',
+          }} />
+          {/* Overlay text */}
+          <div style={{
+            position: 'absolute', bottom: '2rem', left: '2rem',
+          }}>
+            <span style={{
+              fontFamily: "'Outfit', sans-serif", fontWeight: 800,
+              fontSize: 'clamp(1.1rem, 3vw, 1.75rem)',
+              color: 'white',
+              textShadow: '0 2px 12px hsl(237 40% 10% / 0.6)',
+              letterSpacing: '-0.02em',
+            }}>
+              Trusted by 1,000+ families across India
+            </span>
+          </div>
+        </motion.div>
 
         {/* Cards */}
         <div style={{
